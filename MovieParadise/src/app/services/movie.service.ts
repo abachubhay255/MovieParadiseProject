@@ -11,7 +11,7 @@ export class MovieService {
 
   constructor(private http: HttpClient) {
     this.BASEURL = 'https://api.themoviedb.org/3/';
-    this.APIKEY = 'e56c9b04b53586a718ad452bc7e096a3';
+    this.APIKEY = 'API KEY';
   }
 
   getPopularMovies(): Observable<any> {
