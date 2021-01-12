@@ -1,0 +1,11 @@
+<body
+  style="background-color: black; background-image: url('https://i.ytimg.com/vi/9sNQFJAb3Ss/maxresdefault.jpg'
+  )">
+<mat-toolbar color="primary">
+  <span> Movie Paradise</span>
+  <button *ngIf="currentUser" style="position: absolute; right: 10px;" color="warn" mat-raised-button
+          (click)="logout()">Logout
+  </button>
+</mat-toolbar>
+<router-outlet></router-outlet>
+</body>

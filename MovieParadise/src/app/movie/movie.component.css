@@ -1,0 +1,12 @@
+.movie-card {
+  height: 765px;
+  overflow: auto;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #2196f3;
+  outline: 1px solid slategrey;
+}

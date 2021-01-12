@@ -1,0 +1,64 @@
+<div class="center">
+  <mat-card class="center-card">
+    <mat-card-header>
+
+      <mat-card-title>Create Group Account</mat-card-title>
+
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="form-group">
+        <mat-form-field>
+          <input matInput placeholder="Name" type="text" [(ngModel)]="newName" class="form-control">
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field>
+          <input matInput placeholder="Email" type="text" [(ngModel)]="newEmail" class="form-control">
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+
+        <mat-form-field>
+          <input matInput placeholder="Username" type="text" [(ngModel)]="newUsername" class="form-control">
+        </mat-form-field>
+
+      </div>
+
+      <div class="form-group">
+        <mat-form-field>
+          <input matInput placeholder="Password" type="password" [(ngModel)]="newPassword" class="form-control">
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-raised-button color="accent" (click)="addMember()">
+          <mat-icon matListIcon>person_add_alt_1</mat-icon>
+        </button>
+      </div>
+      <div>
+        <mat-list>
+          <mat-list-item *ngFor="let member of members">
+            <mat-icon matListIcon>person</mat-icon>
+            {{member.name}}
+            <div style="width:5px;
+                  height:auto;
+                  display:inline-block;"></div>
+            <button mat-raised-button color="warn" (click)="removeMember(member)">
+              <mat-icon matListIcon>person_remove</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <div class="form-group">
+        <mat-form-field>
+          <input matInput placeholder="Group Name" type="text" [(ngModel)]="group" class="form-control">
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="submit()">Register</button>
+      <button mat-raised-button color="warn" routerLink="">Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

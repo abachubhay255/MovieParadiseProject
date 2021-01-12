@@ -1,0 +1,100 @@
+<div style="background-color: black; background-image: url('https://i.ytimg.com/vi/9sNQFJAb3Ss/maxresdefault.jpg'
+  )">
+  <br>
+  <div align="center">
+    <button *ngIf="isHome" color="accent" mat-raised-button routerLink="/movielist">View Movie Lists</button>
+    &nbsp;
+    <mat-form-field *ngIf="isHome" appearance="fill">
+      <mat-label>Movie Search</mat-label>
+      <input matInput style="color: white" (keyup)="searchMovies()" placeholder="Enter name" type="text"
+             [(ngModel)]="searchQuery">
+      <mat-icon color="primary" matSuffix>movie</mat-icon>
+      <mat-hint>Please enter at least 4 characters</mat-hint>
+    </mat-form-field>
+    &nbsp;
+    <button *ngIf="isHome" color="primary" mat-raised-button (click)="onCreateMovieList()">Create New Movie List
+    </button>
+    <button *ngIf="!isHome" color="accent" mat-raised-button routerLink="/accounthome">Home</button>
+    <div *ngIf="!isHome" style="width:5px;
+    height:auto;
+    display:inline-block;"></div>
+    <button *ngIf="!isHome" color="primary" mat-raised-button routerLink="/movielist">Back to Movie Lists</button>
+  </div>
+  <br>
+  <h1 *ngIf="isHome && !isSearch" style="color: white;">Popular Movies</h1>
+  <h1 *ngIf="isHome && isSearch" style="color: white;">Results</h1>
+  <h1 align="left" *ngIf="!isHome" style="color: white;">Your Movies</h1>
+  <mat-grid-list cols="5" rowHeight="800" gutterSize="10px">
+    <mat-grid-tile *ngFor="let movie of displayMovies">
+      <mat-card class="movie-card">
+        <mat-card-header>
+          <mat-card-title>{{movie.original_title}}</mat-card-title>
+          <mat-card-subtitle>{{movie.release_date | date}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://image.tmdb.org/t/p/original/{{movie.poster_path}}"
+             alt="{{movie.original_title}}">
+        <mat-card-content>
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Show Description
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>{{movie.overview}}</p>
+          </mat-expansion-panel>
+          <br>
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                View Cast
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <!--            <mat-list role="list">-->
+            <!--              <mat-list-item style="height: auto; width: auto"  role="listitem">-->
+            <!--                <div mat-line>-->
+            <!--                    -->
+            <!--                </div>-->
+            <!--                <div style="text-align: end"></div>-->
+            <!--              </mat-list-item>-->
+            <!--            </mat-list>-->
+            <!--            <mat-grid-list cols="1" rowHeight="4:3">-->
+            <!--              <div >-->
+            <!--                <mat-grid-tile *ngFor="let member of movie.members"><img mat-card-sm-image style="border:5px solid black;"-->
+            <!--                                    src="https://image.tmdb.org/t/p/original/{{member.profile_path}}"-->
+            <!--                                    alt="{{member.name}}"></mat-grid-tile>-->
+            <!--                <mat-grid-tile-header *ngFor="let member of movie.members">{{member.name}}</mat-grid-tile-header>-->
+            <!--              </div>-->
+            <!--            </mat-grid-list>-->
+            <mat-grid-list cols="1" rowHeight="315px" gutterSize="5px">
+              <mat-grid-tile *ngFor="let member of movie.members"
+                             [colspan]="1"
+                             [rowspan]="1">
+                <img height="315px"
+                     src="https://image.tmdb.org/t/p/w500/{{member.profile_path}}">
+                <mat-grid-tile-footer>
+                  {{member.name}}
+                </mat-grid-tile-footer>
+                <mat-grid-tile-header>
+                  {{member.character}}
+                </mat-grid-tile-header>
+              </mat-grid-tile>
+
+            </mat-grid-list>
+          </mat-expansion-panel>
+          <br>
+          <div style="display: flex;justify-content: center;align-items: center;">
+            <a *ngIf="movie.trailer" (click)="onViewTrailer(movie.trailer)"
+               color="accent" mat-raised-button> View Trailer</a>
+            <div style="width:5px;height:auto;display:inline-block;"></div>
+            <a *ngIf="movie.watchProviders" href="{{movie.watchProviders}}" target="_blank"
+               color="accent" mat-raised-button> Where to Watch</a>
+          </div>
+        </mat-card-content>
+        <mat-card-actions style="display: flex;justify-content: center;align-items: center;">
+          <button *ngIf="isHome" color="primary" mat-raised-button (click)="onAddMovie(movie)">Add Movie</button>
+          <button *ngIf="!isHome" color="warn" mat-raised-button (click)="onRemoveMovie(movie)">Remove Movie</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
